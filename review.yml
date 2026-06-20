@@ -1,0 +1,106 @@
+aid: shotstack
+name: Shotstack
+review:
+  question: Does Shotstack expose a documented public WebSocket or async-messaging API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Shotstack's rendering model is asynchronous but is implemented over plain
+    REST: a render is submitted with POST /edit/v1/render and its result is
+    retrieved by polling GET /edit/v1/render/{id}. Optionally, Shotstack POSTs
+    a webhook (the edit "callback" URL, and Ingest source webhooks) to the
+    client's HTTPS endpoint when a job changes status. There is no streaming
+    transport (no SSE, no WebSocket) and no broker-based messaging, so the
+    surface is best modeled as REST plus outbound webhooks rather than an
+    AsyncAPI document. An AsyncAPI spec was not created.
+findings:
+  summary: |
+    Shotstack does not publish a documented public WebSocket or message-broker
+    API. The platform is REST-only over HTTPS across four APIs - Edit
+    (https://api.shotstack.io/edit/v1), Ingest
+    (https://api.shotstack.io/ingest/v1), Serve
+    (https://api.shotstack.io/serve/v1), and Create
+    (https://api.shotstack.io/create/v1) - each authenticated with an
+    x-api-key header and offered in v1 (production) and stage (sandbox)
+    environments. Rendering and AI asset generation are asynchronous: the
+    client submits a job and then polls a status endpoint, or registers an
+    HTTPS webhook callback that Shotstack calls when the job status changes.
+    This submit/poll plus outbound-webhook pattern is the only asynchronous
+    behavior; no realtime, bidirectional, or streaming WebSocket (ws:// or
+    wss://) or SSE endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.shotstack.io
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTPS POST callbacks on render/ingest status change (Edit "callback" field and Ingest source webhooks). Client-hosted receiver, not a Shotstack-hosted async channel.
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming endpoint is documented; render progress is obtained by polling the status endpoint.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Edit, Ingest, Serve, or Create API references as of the review date.
+  asyncPattern:
+    model: submit-and-poll-plus-webhook
+    submit:
+      - POST https://api.shotstack.io/edit/v1/render
+      - POST https://api.shotstack.io/edit/v1/templates/render
+      - POST https://api.shotstack.io/ingest/v1/sources
+      - POST https://api.shotstack.io/create/v1/assets
+    poll:
+      - GET https://api.shotstack.io/edit/v1/render/{id}
+      - GET https://api.shotstack.io/ingest/v1/sources/{id}
+      - GET https://api.shotstack.io/create/v1/assets/{id}
+    webhook:
+      - note: Edit render "callback" URL receives status updates (queued, fetching, rendering, saving, done, failed).
+      - note: Ingest sources support status webhooks (queued, importing, ready, failed).
+  endpointsConfirmedRest:
+    - POST   https://api.shotstack.io/edit/v1/render
+    - GET    https://api.shotstack.io/edit/v1/render/{id}
+    - GET    https://api.shotstack.io/edit/v1/probe/{url}
+    - POST   https://api.shotstack.io/edit/v1/templates
+    - GET    https://api.shotstack.io/edit/v1/templates
+    - GET    https://api.shotstack.io/edit/v1/templates/{id}
+    - PUT    https://api.shotstack.io/edit/v1/templates/{id}
+    - DELETE https://api.shotstack.io/edit/v1/templates/{id}
+    - POST   https://api.shotstack.io/edit/v1/templates/render
+    - POST   https://api.shotstack.io/ingest/v1/sources
+    - GET    https://api.shotstack.io/ingest/v1/sources
+    - GET    https://api.shotstack.io/ingest/v1/sources/{id}
+    - DELETE https://api.shotstack.io/ingest/v1/sources/{id}
+    - POST   https://api.shotstack.io/ingest/v1/upload
+    - GET    https://api.shotstack.io/serve/v1/assets/{id}
+    - DELETE https://api.shotstack.io/serve/v1/assets/{id}
+    - GET    https://api.shotstack.io/serve/v1/assets/render/{id}
+    - POST   https://api.shotstack.io/serve/v1/assets
+    - POST   https://api.shotstack.io/create/v1/assets
+    - GET    https://api.shotstack.io/create/v1/assets/{id}
+sources:
+  - url: https://shotstack.io/docs/api/
+    type: APIReference
+    note: v1 API reference lists REST endpoints for Edit, Serve, and Ingest with x-api-key auth; no WebSocket or SSE.
+  - url: https://shotstack.io/docs/guide/architecture/apis/
+    type: Documentation
+    note: Describes the three core REST APIs (Edit, Serve, Ingest) and v1/stage environments.
+  - url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
+    type: Documentation
+    note: Ingest API fetches and transforms sources asynchronously with status polling/webhooks.
+  - url: https://shotstack.io/product/create-api/
+    type: Documentation
+    note: Create API generates AI assets (text-to-speech, text-to-image, image-to-video, text generation) via POST /create/v1/assets.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket, SSE, or broker messaging surface exists. The asynchronous
+    rendering is a REST submit/poll workflow augmented by outbound HTTPS
+    webhooks, which is fully captured by the OpenAPI definition plus the
+    documented callback field. An AsyncAPI document was not authored because
+    there is no Shotstack-hosted streaming or pub/sub channel to model.

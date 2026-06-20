@@ -1,0 +1,169 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Shotstack
+providerId: shotstack
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- Video
+- Video Editing
+- Media
+- Rendering
+- Generative AI
+- Plans
+description: >-
+  Shotstack prices on rendered video duration. The metering unit is a credit,
+  where 1 credit equals 1 minute of rendered video or 10 generated images. A
+  free developer sandbox provides 10 credits valid for 30 days. Pay-As-You-Go
+  bills $0.30 per rendered minute via prepaid credit packs (one-time $75 setup
+  fee, credits valid 1 year). The Subscription plan bills $0.20 per rendered
+  minute from a $39/month base of 200 credits, with credit rollover up to 3x
+  and overages at a 30% premium. High Volume / Enterprise starts at 50,000
+  minutes per year with quote-based pricing and 4K output.
+notes: >-
+  Representative tiers and rates as published on the Shotstack pricing page;
+  check the page for the current credit-pack sizes and rates. Output is capped
+  at 1080p/60fps on PAYG and Subscription, and 4K/60fps on High Volume.
+sources:
+- https://shotstack.io/pricing/
+- https://shotstack.io/docs/
+plans:
+- id: shotstack-sandbox
+  name: Free Sandbox
+  type: free
+  description: >-
+    Free developer sandbox with 10 credits valid for 30 days and access to
+    all core features for testing.
+  entries:
+  - label: Sandbox Credits
+    name: sandbox_credits
+    type: free
+    metric: credits
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free for 30 days
+    userMultiplied: false
+  elements:
+  - name: Edit (Render) API
+  - name: Templates API
+  - name: Ingest API
+  - name: Serve API
+  - name: Create (AI Assets) API
+- id: shotstack-payg
+  name: Pay-As-You-Go
+  type: usage
+  description: >-
+    Prepaid credit packs billed at $0.30 per rendered minute. One-time $75
+    setup fee; credits valid for 1 year. Maximum resolution 1080p/60fps.
+  entries:
+  - label: Rendered Minute
+    name: rendered_minute
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1
+    price: $0.30 per rendered minute
+    userMultiplied: false
+  - label: Generated Images
+    name: generated_images
+    type: usage
+    metric: images
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 10
+    price: 1 credit per 10 images
+    userMultiplied: false
+  - label: Setup Fee
+    name: setup_fee
+    type: flat
+    metric: account
+    limit: 1
+    timeFrame: lifetime
+    geo: global
+    unit: 1
+    price: $75 one-time
+    userMultiplied: false
+  elements:
+  - name: Edit (Render) API
+  - name: Templates API
+  - name: Ingest API
+  - name: Serve API
+  - name: Create (AI Assets) API
+- id: shotstack-subscription
+  name: Subscription
+  type: subscription
+  description: >-
+    Monthly subscription billed at $0.20 per rendered minute from a $39/month
+    base of 200 credits, with rollover up to 3x the monthly allowance and
+    overages at a 30% premium. Maximum resolution 1080p/60fps.
+  entries:
+  - label: Monthly Base
+    name: monthly_base
+    type: flat
+    metric: credits
+    limit: 200
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $39 per month for 200 credits
+    userMultiplied: false
+  - label: Rendered Minute
+    name: rendered_minute
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.20 per rendered minute
+    userMultiplied: false
+  - label: Overage
+    name: overage
+    type: usage
+    metric: minutes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 30% premium over the standard per-minute rate
+    userMultiplied: false
+  elements:
+  - name: Edit (Render) API
+  - name: Templates API
+  - name: Ingest API
+  - name: Serve API
+  - name: Create (AI Assets) API
+  - name: Credit Rollover (up to 3x)
+- id: shotstack-high-volume
+  name: High Volume / Enterprise
+  type: enterprise
+  description: >-
+    Quote-based plan starting at 50,000 rendered minutes per year, with 4K/60fps
+    output, higher concurrency, dedicated support with a 4-hour SLA, and a
+    99.9% uptime SLA. Contact Shotstack sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (from 50,000 minutes/year)
+    userMultiplied: false
+  elements:
+  - name: 4K Output
+  - name: Custom Volume Pricing
+  - name: Dedicated Support (4-hour SLA)
+  - name: 99.9% Uptime SLA
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

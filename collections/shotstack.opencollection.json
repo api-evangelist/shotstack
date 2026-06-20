@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shotstack API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "x-api-key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Edit", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Queue a render", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/edit/v1/render",
+            "body": { "type": "json", "data": "{\"timeline\":{\"tracks\":[]},\"output\":{\"format\":\"mp4\",\"resolution\":\"sd\"}}" }
+          },
+          "docs": "Queue a video, image, or audio render from a JSON edit specification."
+        },
+        {
+          "info": { "name": "Get render status", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/edit/v1/render/{id}"
+          },
+          "docs": "Retrieve the status, progress, and output URL of a render by ID."
+        },
+        {
+          "info": { "name": "Probe a media asset", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/edit/v1/probe/{url}"
+          },
+          "docs": "Inspect media asset metadata using FFprobe (URL-encoded asset URL)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Templates", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a template", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/edit/v1/templates",
+            "body": { "type": "json", "data": "{\"name\":\"My Template\",\"template\":{}}" }
+          },
+          "docs": "Save an edit as a reusable template."
+        },
+        {
+          "info": { "name": "List templates", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/edit/v1/templates"
+          },
+          "docs": "List all templates for the authenticated account."
+        },
+        {
+          "info": { "name": "Get a template", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/edit/v1/templates/{id}"
+          },
+          "docs": "Retrieve a specific template by ID."
+        },
+        {
+          "info": { "name": "Update a template", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.shotstack.io/edit/v1/templates/{id}",
+            "body": { "type": "json", "data": "{\"name\":\"My Template\",\"template\":{}}" }
+          },
+          "docs": "Update an existing template's name and edit."
+        },
+        {
+          "info": { "name": "Delete a template", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.shotstack.io/edit/v1/templates/{id}"
+          },
+          "docs": "Delete a template by ID."
+        },
+        {
+          "info": { "name": "Render a template", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/edit/v1/templates/render",
+            "body": { "type": "json", "data": "{\"id\":\"\",\"merge\":[]}" }
+          },
+          "docs": "Render an asset from a template with optional merge fields."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Ingest", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Ingest a source from a URL", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/ingest/v1/sources",
+            "body": { "type": "json", "data": "{\"url\":\"https://example.com/video.mp4\"}" }
+          },
+          "docs": "Queue a source file (video, image, audio, font) to be fetched, stored, and transformed."
+        },
+        {
+          "info": { "name": "List sources", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/ingest/v1/sources"
+          },
+          "docs": "List ingested source files."
+        },
+        {
+          "info": { "name": "Get a source", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/ingest/v1/sources/{id}"
+          },
+          "docs": "Retrieve a specific source file by ID."
+        },
+        {
+          "info": { "name": "Delete a source", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.shotstack.io/ingest/v1/sources/{id}"
+          },
+          "docs": "Delete an ingested source file by ID."
+        },
+        {
+          "info": { "name": "Request a direct upload", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/ingest/v1/upload"
+          },
+          "docs": "Request a signed URL to upload a source file directly to Shotstack storage."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Serve", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get an asset", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/serve/v1/assets/{id}"
+          },
+          "docs": "Retrieve a hosted asset's details and CDN URL by asset ID."
+        },
+        {
+          "info": { "name": "Delete an asset", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.shotstack.io/serve/v1/assets/{id}"
+          },
+          "docs": "Delete a hosted asset by asset ID."
+        },
+        {
+          "info": { "name": "Get assets by render ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/serve/v1/assets/render/{id}"
+          },
+          "docs": "Retrieve all assets (video, thumbnail, poster) for a render ID."
+        },
+        {
+          "info": { "name": "Transfer an asset", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/serve/v1/assets",
+            "body": { "type": "json", "data": "{\"url\":\"https://example.com/file.mp4\",\"destinations\":[{\"provider\":\"s3\"}]}" }
+          },
+          "docs": "Transfer a file from a URL to one or more hosting destinations."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Create", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Generate an AI asset", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/create/v1/assets",
+            "body": { "type": "json", "data": "{\"provider\":\"shotstack\",\"options\":{\"type\":\"text-to-speech\",\"text\":\"Hello from Shotstack\"}}" }
+          },
+          "docs": "Generate an AI asset (text-to-speech, text-to-image, image-to-video, text generation)."
+        },
+        {
+          "info": { "name": "Get a generated asset", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/create/v1/assets/{id}"
+          },
+          "docs": "Retrieve the status and URL of a generated AI asset by ID."
+        }
+      ]
+    }
+  ]
+}

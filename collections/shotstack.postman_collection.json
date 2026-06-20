@@ -1,0 +1,353 @@
+{
+  "info": {
+    "name": "Shotstack API",
+    "description": "Cloud video-editing API: Edit (render), Templates, Ingest, Serve, and Create (AI assets). All requests authenticate with an x-api-key header.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-api-key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.shotstack.io", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Edit",
+      "item": [
+        {
+          "name": "Queue a render",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/render",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "render"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timeline\": {\n    \"background\": \"#000000\",\n    \"tracks\": [\n      {\n        \"clips\": [\n          {\n            \"asset\": { \"type\": \"title\", \"text\": \"Hello World\" },\n            \"start\": 0,\n            \"length\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"output\": { \"format\": \"mp4\", \"resolution\": \"sd\" }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get render status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/render/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "render", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Probe a media asset",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/probe/:url",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "probe", ":url"],
+              "variable": [{ "key": "url", "value": "" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "Create a template",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/templates",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "templates"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Template\",\n  \"template\": {\n    \"timeline\": { \"tracks\": [] },\n    \"output\": { \"format\": \"mp4\", \"resolution\": \"sd\" }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List templates",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/templates",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "templates"]
+            }
+          }
+        },
+        {
+          "name": "Get a template",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/templates/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "templates", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Update a template",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/templates/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "templates", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Template\",\n  \"template\": {\n    \"timeline\": { \"tracks\": [] },\n    \"output\": { \"format\": \"mp4\", \"resolution\": \"sd\" }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete a template",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/templates/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "templates", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Render a template",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/edit/v1/templates/render",
+              "host": ["{{baseUrl}}"],
+              "path": ["edit", "v1", "templates", "render"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"\",\n  \"merge\": [ { \"find\": \"NAME\", \"replace\": \"World\" } ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ingest",
+      "item": [
+        {
+          "name": "Ingest a source from a URL",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ingest/v1/sources",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingest", "v1", "sources"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com/video.mp4\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List sources",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/ingest/v1/sources",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingest", "v1", "sources"]
+            }
+          }
+        },
+        {
+          "name": "Get a source",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/ingest/v1/sources/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingest", "v1", "sources", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Delete a source",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/ingest/v1/sources/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingest", "v1", "sources", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Request a direct upload",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/ingest/v1/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["ingest", "v1", "upload"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Serve",
+      "item": [
+        {
+          "name": "Get an asset",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/serve/v1/assets/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["serve", "v1", "assets", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Delete an asset",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/serve/v1/assets/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["serve", "v1", "assets", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Get assets by render ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/serve/v1/assets/render/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["serve", "v1", "assets", "render", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Transfer an asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/serve/v1/assets",
+              "host": ["{{baseUrl}}"],
+              "path": ["serve", "v1", "assets"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com/file.mp4\",\n  \"destinations\": [ { \"provider\": \"s3\" } ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create",
+      "item": [
+        {
+          "name": "Generate an AI asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{apiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/create/v1/assets",
+              "host": ["{{baseUrl}}"],
+              "path": ["create", "v1", "assets"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"shotstack\",\n  \"options\": {\n    \"type\": \"text-to-speech\",\n    \"text\": \"Hello from Shotstack\",\n    \"voice\": \"Matthew\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get a generated asset",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "x-api-key", "value": "{{apiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/create/v1/assets/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["create", "v1", "assets", ":id"],
+              "variable": [{ "key": "id", "value": "" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Shotstack
+providerId: shotstack
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Video
+- Video Editing
+- Media
+- Rendering
+- Generative AI
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Shotstack constrains usage through API request rate limits and render
+  concurrency rather than token quotas. Renders are queued asynchronously and
+  processed against a per-account concurrency allowance that scales with plan
+  tier (Subscription and High Volume plans offer thousands of concurrent
+  renders). Individual renders are capped at a 3-hour maximum length. Credit
+  balance (1 credit = 1 rendered minute or 10 images) acts as the primary usage
+  ceiling. Specific per-endpoint RPS values are not reconciled in this artifact.
+notes: >-
+  Verify per-account request limits and concurrency on reconciliation; render
+  concurrency and priority increase with the Subscription and High Volume tiers.
+sources:
+- https://shotstack.io/docs/
+- https://shotstack.io/pricing/
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-account request rate across Edit, Ingest, Serve, and Create APIs.
+- name: Render Concurrency
+  scope: account
+  metric: concurrent_renders
+  limit: thousands of concurrent renders (tier-dependent)
+  notes: Concurrent renders scale with the plan tier; queued renders process as capacity frees.
+- name: Maximum Render Length
+  scope: render
+  metric: minutes
+  limit: 180
+  notes: A single render is capped at 3 hours of output duration.
+- name: Credit Balance
+  scope: account
+  metric: credits
+  limit: plan-dependent
+  notes: 1 credit = 1 rendered minute or 10 images; depletion blocks new renders.
+policies:
+- name: Tiered Limits
+  description: Concurrency, priority, and resolution caps raise from Sandbox to PAYG to Subscription to High Volume / Enterprise.
+- name: Asynchronous Queueing
+  description: Renders are queued and processed asynchronously; poll the render status endpoint or use a webhook callback rather than blocking.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor Retry-After.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
