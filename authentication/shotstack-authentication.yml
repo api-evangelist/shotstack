@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/shotstack-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Developer API key. The same key set is used by all Shotstack APIs.
+  sources:
+  - openapi/shotstack-openapi.yml

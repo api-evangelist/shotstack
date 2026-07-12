@@ -135,6 +135,10 @@ apis:
     and text generation - through built-in (Shotstack) and third-party (ElevenLabs,
     Stability AI) providers, returning hosted assets for use in renders.
 common:
+- type: DomainSecurity
+  url: security/shotstack-domain-security.yml
+- type: Authentication
+  url: authentication/shotstack-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/shotstack
 - type: LinkedIn
