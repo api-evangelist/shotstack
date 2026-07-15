@@ -135,6 +135,8 @@ apis:
     and text generation - through built-in (Shotstack) and third-party (ElevenLabs,
     Stability AI) providers, returning hosted assets for use in renders.
 common:
+- type: AgenticAccess
+  url: agentic-access/shotstack-agentic-access.yml
 - type: DomainSecurity
   url: security/shotstack-domain-security.yml
 - type: Authentication
