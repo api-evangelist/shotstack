@@ -1,0 +1,188 @@
+openapi: 3.0.1
+info:
+  title: Shotstack Create API
+  description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
+  termsOfService: https://shotstack.io/terms/
+  contact:
+    name: Shotstack Support
+    url: https://shotstack.io/contact/
+  version: '1.0'
+servers:
+- url: https://api.shotstack.io
+  description: Shotstack production and sandbox host (use /edit/v1 or /edit/stage, etc.)
+security:
+- apiKey: []
+tags:
+- name: Create
+  description: Generate AI assets such as text-to-speech and text-to-image.
+paths:
+  /create/v1/assets:
+    post:
+      operationId: generateAsset
+      tags:
+      - Create
+      summary: Generate an AI asset
+      description: Generate an AI asset (text-to-speech, text-to-image, image-to-video, or text generation) using a built-in or third-party provider. Returns an asset ID to poll for the generated, hosted asset.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateAssetRequest'
+      responses:
+        '201':
+          description: Generation queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateAssetResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /create/v1/assets/{id}:
+    get:
+      operationId: getGeneratedAsset
+      tags:
+      - Create
+      summary: Get a generated asset
+      description: Retrieve the status and URL of a generated AI asset by ID.
+      parameters:
+      - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: A generated asset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateAssetResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    GenerateAssetResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: asset
+            id:
+              type: string
+              format: uuid
+            attributes:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                owner:
+                  type: string
+                provider:
+                  type: string
+                type:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - queued
+                  - processing
+                  - done
+                  - failed
+                url:
+                  type: string
+                  format: uri
+                created:
+                  type: string
+                  format: date-time
+                updated:
+                  type: string
+                  format: date-time
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
+    GenerateAssetRequest:
+      type: object
+      required:
+      - provider
+      - options
+      properties:
+        provider:
+          type: string
+          description: The generation provider.
+          enum:
+          - shotstack
+          - elevenlabs
+          - stability-ai
+          - openai
+        options:
+          type: object
+          required:
+          - type
+          properties:
+            type:
+              type: string
+              enum:
+              - text-to-speech
+              - text-to-image
+              - image-to-video
+              - text-generation
+            text:
+              type: string
+              description: Prompt or text input for the generation.
+            prompt:
+              type: string
+            voice:
+              type: string
+            language:
+              type: string
+  parameters:
+    AssetId:
+      name: id
+      in: path
+      required: true
+      description: The asset ID.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Developer API key. The same key set is used by all Shotstack APIs.

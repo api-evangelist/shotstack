@@ -1,0 +1,475 @@
+openapi: 3.0.1
+info:
+  title: Shotstack Create Templates API
+  description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
+  termsOfService: https://shotstack.io/terms/
+  contact:
+    name: Shotstack Support
+    url: https://shotstack.io/contact/
+  version: '1.0'
+servers:
+- url: https://api.shotstack.io
+  description: Shotstack production and sandbox host (use /edit/v1 or /edit/stage, etc.)
+security:
+- apiKey: []
+tags:
+- name: Templates
+  description: Manage and render reusable edit templates with merge fields.
+paths:
+  /edit/v1/templates:
+    post:
+      operationId: createTemplate
+      tags:
+      - Templates
+      summary: Create a template
+      description: Save an edit as a reusable template with optional merge fields.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+      responses:
+        '201':
+          description: Template created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listTemplates
+      tags:
+      - Templates
+      summary: List templates
+      description: List all templates for the authenticated account.
+      responses:
+        '200':
+          description: A list of templates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /edit/v1/templates/{id}:
+    get:
+      operationId: getTemplate
+      tags:
+      - Templates
+      summary: Get a template
+      parameters:
+      - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: A template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateTemplate
+      tags:
+      - Templates
+      summary: Update a template
+      parameters:
+      - $ref: '#/components/parameters/TemplateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+      responses:
+        '200':
+          description: Template updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteTemplate
+      tags:
+      - Templates
+      summary: Delete a template
+      parameters:
+      - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: Template deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /edit/v1/templates/render:
+    post:
+      operationId: renderTemplate
+      tags:
+      - Templates
+      summary: Render a template
+      description: Render an asset from a saved template, supplying optional merge fields to substitute variables in the template.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateRenderRequest'
+      responses:
+        '201':
+          description: Render queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueuedResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    QueuedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            message:
+              type: string
+            id:
+              type: string
+              format: uuid
+    Template:
+      type: object
+      required:
+      - name
+      - template
+      properties:
+        name:
+          type: string
+        template:
+          $ref: '#/components/schemas/Edit'
+    Timeline:
+      type: object
+      required:
+      - tracks
+      properties:
+        soundtrack:
+          $ref: '#/components/schemas/Soundtrack'
+        background:
+          type: string
+          description: Hex color of the background canvas.
+          example: '#000000'
+        fonts:
+          type: array
+          items:
+            type: object
+            properties:
+              src:
+                type: string
+                format: uri
+        tracks:
+          type: array
+          description: Layers of clips composited from bottom to top.
+          items:
+            $ref: '#/components/schemas/Track'
+    TemplateListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        response:
+          type: object
+          properties:
+            templates:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+    Soundtrack:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+        effect:
+          type: string
+          enum:
+          - fadeIn
+          - fadeOut
+          - fadeInFadeOut
+        volume:
+          type: number
+    Output:
+      type: object
+      required:
+      - format
+      properties:
+        format:
+          type: string
+          enum:
+          - mp4
+          - gif
+          - jpg
+          - png
+          - bmp
+          - mp3
+          - webm
+        resolution:
+          type: string
+          enum:
+          - preview
+          - mobile
+          - sd
+          - hd
+          - '1080'
+        aspectRatio:
+          type: string
+          enum:
+          - '16:9'
+          - '9:16'
+          - '1:1'
+          - '4:5'
+          - '4:3'
+        fps:
+          type: number
+          enum:
+          - 12
+          - 15
+          - 24
+          - 25
+          - 30
+          - 60
+        quality:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+        destinations:
+          type: array
+          description: Where to deliver the rendered output.
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+                enum:
+                - shotstack
+                - s3
+                - googlecloudstorage
+                - googledrive
+                - mux
+                - vimeo
+    Asset:
+      type: object
+      description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - video
+          - image
+          - audio
+          - title
+          - html
+          - luma
+          - caption
+          - text-to-speech
+          - text-to-image
+          - image-to-video
+        src:
+          type: string
+          format: uri
+          description: Source URL for video, image, audio, and luma assets.
+        text:
+          type: string
+          description: Text content for title, caption, and AI text-based assets.
+        trim:
+          type: number
+        volume:
+          type: number
+    Edit:
+      type: object
+      required:
+      - timeline
+      - output
+      properties:
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+        output:
+          $ref: '#/components/schemas/Output'
+        merge:
+          type: array
+          description: Find-and-replace merge fields applied before rendering.
+          items:
+            $ref: '#/components/schemas/MergeField'
+        callback:
+          type: string
+          format: uri
+          description: HTTPS webhook URL called when the render status changes.
+    TemplateResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            template:
+              $ref: '#/components/schemas/Edit'
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
+    TemplateRenderRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The template ID to render.
+        merge:
+          type: array
+          items:
+            $ref: '#/components/schemas/MergeField'
+    MergeField:
+      type: object
+      properties:
+        find:
+          type: string
+        replace:
+          type: string
+    Clip:
+      type: object
+      required:
+      - asset
+      - start
+      - length
+      properties:
+        asset:
+          $ref: '#/components/schemas/Asset'
+        start:
+          type: number
+          description: Start time on the timeline in seconds.
+        length:
+          oneOf:
+          - type: number
+          - type: string
+          description: Duration of the clip in seconds, or "auto"/"end".
+        fit:
+          type: string
+          enum:
+          - crop
+          - cover
+          - contain
+          - none
+        scale:
+          type: number
+        position:
+          type: string
+          enum:
+          - top
+          - topRight
+          - right
+          - bottomRight
+          - bottom
+          - bottomLeft
+          - left
+          - topLeft
+          - center
+        opacity:
+          type: number
+        transition:
+          type: object
+          properties:
+            in:
+              type: string
+            out:
+              type: string
+        effect:
+          type: string
+    Track:
+      type: object
+      required:
+      - clips
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clip'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    TemplateId:
+      name: id
+      in: path
+      required: true
+      description: The template ID.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Developer API key. The same key set is used by all Shotstack APIs.

@@ -1,0 +1,227 @@
+openapi: 3.0.1
+info:
+  title: Shotstack Create Serve API
+  description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
+  termsOfService: https://shotstack.io/terms/
+  contact:
+    name: Shotstack Support
+    url: https://shotstack.io/contact/
+  version: '1.0'
+servers:
+- url: https://api.shotstack.io
+  description: Shotstack production and sandbox host (use /edit/v1 or /edit/stage, etc.)
+security:
+- apiKey: []
+tags:
+- name: Serve
+  description: Inspect, manage, and deliver hosted assets.
+paths:
+  /serve/v1/assets/{id}:
+    get:
+      operationId: getAsset
+      tags:
+      - Serve
+      summary: Get an asset
+      description: Retrieve the details and CDN URL of a hosted asset by asset ID.
+      parameters:
+      - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: An asset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteAsset
+      tags:
+      - Serve
+      summary: Delete an asset
+      parameters:
+      - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: Asset deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /serve/v1/assets/render/{id}:
+    get:
+      operationId: getAssetsByRender
+      tags:
+      - Serve
+      summary: Get assets by render ID
+      description: Retrieve all assets (video, thumbnail, poster) associated with a render ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The render ID.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: A list of assets for the render.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /serve/v1/assets:
+    post:
+      operationId: transferAsset
+      tags:
+      - Serve
+      summary: Transfer an asset
+      description: Transfer a file from a URL to one or more hosting destinations.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '201':
+          description: Transfer queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    AssetId:
+      name: id
+      in: path
+      required: true
+      description: The asset ID.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    AssetListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetResponse'
+    TransferRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the file to transfer.
+        destinations:
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+                enum:
+                - shotstack
+                - s3
+                - googlecloudstorage
+                - googledrive
+                - mux
+                - vimeo
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
+    AssetResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: asset
+            id:
+              type: string
+              format: uuid
+            attributes:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                owner:
+                  type: string
+                region:
+                  type: string
+                renderId:
+                  type: string
+                  format: uuid
+                filename:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+                status:
+                  type: string
+                  enum:
+                  - queued
+                  - transferring
+                  - ready
+                  - failed
+                  - deleted
+                created:
+                  type: string
+                  format: date-time
+                updated:
+                  type: string
+                  format: date-time
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Developer API key. The same key set is used by all Shotstack APIs.

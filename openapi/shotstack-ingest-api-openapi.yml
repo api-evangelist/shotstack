@@ -1,0 +1,249 @@
+openapi: 3.0.1
+info:
+  title: Shotstack Create Ingest API
+  description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
+  termsOfService: https://shotstack.io/terms/
+  contact:
+    name: Shotstack Support
+    url: https://shotstack.io/contact/
+  version: '1.0'
+servers:
+- url: https://api.shotstack.io
+  description: Shotstack production and sandbox host (use /edit/v1 or /edit/stage, etc.)
+security:
+- apiKey: []
+tags:
+- name: Ingest
+  description: Upload, store, and transform source assets.
+paths:
+  /ingest/v1/sources:
+    post:
+      operationId: fetchSource
+      tags:
+      - Ingest
+      summary: Ingest a source from a URL
+      description: Queue a source file (video, image, audio, or font) to be fetched from a URL, stored, and optionally transformed into renditions or transcribed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceRequest'
+      responses:
+        '201':
+          description: Source queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: listSources
+      tags:
+      - Ingest
+      summary: List sources
+      responses:
+        '200':
+          description: A list of ingested sources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ingest/v1/sources/{id}:
+    get:
+      operationId: getSource
+      tags:
+      - Ingest
+      summary: Get a source
+      parameters:
+      - $ref: '#/components/parameters/SourceId'
+      responses:
+        '200':
+          description: A source.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteSource
+      tags:
+      - Ingest
+      summary: Delete a source
+      parameters:
+      - $ref: '#/components/parameters/SourceId'
+      responses:
+        '200':
+          description: Source deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ingest/v1/upload:
+    post:
+      operationId: requestUpload
+      tags:
+      - Ingest
+      summary: Request a direct upload
+      description: Request a signed URL to upload a source file directly to Shotstack storage.
+      responses:
+        '201':
+          description: Signed upload URL issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    SourceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceResponse'
+    SourceRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the source file to fetch and store.
+        outputs:
+          type: object
+          description: Optional renditions and/or transcription to generate.
+          properties:
+            renditions:
+              type: array
+              items:
+                type: object
+                properties:
+                  format:
+                    type: string
+                  resolution:
+                    type: string
+            transcription:
+              type: object
+              properties:
+                format:
+                  type: string
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
+    SourceResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: source
+            id:
+              type: string
+              format: uuid
+            attributes:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                owner:
+                  type: string
+                source:
+                  type: string
+                  format: uri
+                status:
+                  type: string
+                  enum:
+                  - queued
+                  - importing
+                  - ready
+                  - failed
+                  - deleted
+                created:
+                  type: string
+                  format: date-time
+                updated:
+                  type: string
+                  format: date-time
+    UploadResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              example: upload
+            id:
+              type: string
+              format: uuid
+            attributes:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                url:
+                  type: string
+                  format: uri
+                  description: Signed URL to PUT the file to.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    SourceId:
+      name: id
+      in: path
+      required: true
+      description: The source ID.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Developer API key. The same key set is used by all Shotstack APIs.
