@@ -7,7 +7,20 @@ description: Shotstack is a cloud video-editing platform that turns a JSON timel
   from a JSON edit specification and templates, the Ingest API uploads and transforms
   source footage, the Serve API hosts and delivers generated assets, and the Create
   API generates AI assets such as text-to-speech, text-to-image, and image-to-video.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/shotstack.png
 tags:
 - Video
 - Video Editing
@@ -18,122 +31,136 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: shotstack:edit-render-api
-  name: Shotstack Edit (Render) API
-  tags:
-  - Video Editing
-  - Rendering
-  - Timeline
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: shotstack:shotstack-create-api
+  name: Shotstack Create API
+  description: Generate AI assets such as text-to-speech and text-to-image.
   humanURL: https://shotstack.io/docs/api/
   baseURL: https://api.shotstack.io/edit/v1
-  properties:
-  - url: https://shotstack.io/docs/guide/architecture/apis/
-    type: Documentation
-  - url: https://shotstack.io/docs/api/
-    type: APIReference
-  - url: openapi/shotstack-openapi.yml
-    type: OpenAPI
-  - url: collections/shotstack.postman_collection.json
-    type: PostmanCollection
-  - url: collections/shotstack.opencollection.json
-    type: OpenCollection
-  description: Queue a video, image, or audio render from a JSON edit specification
-    (timeline, tracks, clips, output) and poll render status by ID. Supports AI
-    generative assets (text-to-speech, text-to-image, image-to-video) embedded in
-    the timeline.
-- aid: shotstack:templates-api
-  name: Shotstack Templates API
   tags:
-  - Templates
-  - Merge Fields
-  - Automation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Create
+  properties:
+  - type: OpenAPI
+    url: openapi/shotstack-create-api-openapi.yml
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/architecture/apis/
+  - type: APIReference
+    url: https://shotstack.io/docs/api/
+  - type: PostmanCollection
+    url: collections/shotstack.postman_collection.json
+  - type: OpenCollection
+    url: collections/shotstack.opencollection.json
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/templates/templates/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/serving-assets/serve-api/
+  - type: Documentation
+    url: https://shotstack.io/product/create-api/
+- aid: shotstack:shotstack-edit-api
+  name: Shotstack Edit API
+  description: Render videos, images, and audio from a JSON edit specification.
   humanURL: https://shotstack.io/docs/api/
   baseURL: https://api.shotstack.io/edit/v1
+  tags:
+  - Edit
   properties:
-  - url: https://shotstack.io/docs/guide/templates/templates/
-    type: Documentation
-  - url: https://shotstack.io/docs/api/
-    type: APIReference
-  - url: openapi/shotstack-openapi.yml
-    type: OpenAPI
-  - url: collections/shotstack.postman_collection.json
-    type: PostmanCollection
-  - url: collections/shotstack.opencollection.json
-    type: OpenCollection
-  description: Save, list, retrieve, update, and delete reusable edit templates, then
-    render them with merge-field variable substitution for data-driven, automated
-    video generation at scale.
-- aid: shotstack:ingest-api
+  - type: OpenAPI
+    url: openapi/shotstack-edit-api-openapi.yml
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/architecture/apis/
+  - type: APIReference
+    url: https://shotstack.io/docs/api/
+  - type: PostmanCollection
+    url: collections/shotstack.postman_collection.json
+  - type: OpenCollection
+    url: collections/shotstack.opencollection.json
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/templates/templates/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/serving-assets/serve-api/
+  - type: Documentation
+    url: https://shotstack.io/product/create-api/
+- aid: shotstack:shotstack-ingest-api
   name: Shotstack Ingest API
+  description: Upload, store, and transform source assets.
+  humanURL: https://shotstack.io/docs/api/
+  baseURL: https://api.shotstack.io/edit/v1
   tags:
   - Ingest
-  - Assets
-  - Transcoding
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://shotstack.io/docs/api/
-  baseURL: https://api.shotstack.io/ingest/v1
   properties:
-  - url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
-    type: Documentation
-  - url: https://shotstack.io/docs/api/
-    type: APIReference
-  - url: openapi/shotstack-openapi.yml
-    type: OpenAPI
-  - url: collections/shotstack.postman_collection.json
-    type: PostmanCollection
-  - url: collections/shotstack.opencollection.json
-    type: OpenCollection
-  description: Upload, store, and transform source footage, images, audio, and fonts
-    from a URL or direct upload, with optional renditions and transcription, ready
-    for use by the Edit API.
-- aid: shotstack:serve-api
+  - type: OpenAPI
+    url: openapi/shotstack-ingest-api-openapi.yml
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/architecture/apis/
+  - type: APIReference
+    url: https://shotstack.io/docs/api/
+  - type: PostmanCollection
+    url: collections/shotstack.postman_collection.json
+  - type: OpenCollection
+    url: collections/shotstack.opencollection.json
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/templates/templates/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/serving-assets/serve-api/
+  - type: Documentation
+    url: https://shotstack.io/product/create-api/
+- aid: shotstack:shotstack-serve-api
   name: Shotstack Serve API
-  tags:
-  - Serving
-  - Hosting
-  - CDN
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Inspect, manage, and deliver hosted assets.
   humanURL: https://shotstack.io/docs/api/
-  baseURL: https://api.shotstack.io/serve/v1
-  properties:
-  - url: https://shotstack.io/docs/guide/serving-assets/serve-api/
-    type: Documentation
-  - url: https://shotstack.io/docs/api/
-    type: APIReference
-  - url: openapi/shotstack-openapi.yml
-    type: OpenAPI
-  - url: collections/shotstack.postman_collection.json
-    type: PostmanCollection
-  - url: collections/shotstack.opencollection.json
-    type: OpenCollection
-  description: Inspect, manage, and delete the hosting of assets generated by the
-    Edit and Ingest APIs, retrieve CDN URLs by asset or render ID, and transfer
-    files to external destinations.
-- aid: shotstack:create-ai-assets-api
-  name: Shotstack Create (AI Assets) API
+  baseURL: https://api.shotstack.io/edit/v1
   tags:
-  - Generative AI
-  - Text to Speech
-  - Text to Image
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://shotstack.io/docs/api/
-  baseURL: https://api.shotstack.io/create/v1
+  - Serve
   properties:
-  - url: https://shotstack.io/product/create-api/
-    type: Documentation
-  - url: https://shotstack.io/docs/api/
-    type: APIReference
-  - url: openapi/shotstack-openapi.yml
-    type: OpenAPI
-  - url: collections/shotstack.postman_collection.json
-    type: PostmanCollection
-  - url: collections/shotstack.opencollection.json
-    type: OpenCollection
-  description: Generate AI assets - text-to-speech, text-to-image, image-to-video,
-    and text generation - through built-in (Shotstack) and third-party (ElevenLabs,
-    Stability AI) providers, returning hosted assets for use in renders.
+  - type: OpenAPI
+    url: openapi/shotstack-serve-api-openapi.yml
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/architecture/apis/
+  - type: APIReference
+    url: https://shotstack.io/docs/api/
+  - type: PostmanCollection
+    url: collections/shotstack.postman_collection.json
+  - type: OpenCollection
+    url: collections/shotstack.opencollection.json
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/templates/templates/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/serving-assets/serve-api/
+  - type: Documentation
+    url: https://shotstack.io/product/create-api/
+- aid: shotstack:shotstack-templates-api
+  name: Shotstack Templates API
+  description: Manage and render reusable edit templates with merge fields.
+  humanURL: https://shotstack.io/docs/api/
+  baseURL: https://api.shotstack.io/edit/v1
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/shotstack-templates-api-openapi.yml
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/architecture/apis/
+  - type: APIReference
+    url: https://shotstack.io/docs/api/
+  - type: PostmanCollection
+    url: collections/shotstack.postman_collection.json
+  - type: OpenCollection
+    url: collections/shotstack.opencollection.json
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/templates/templates/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/ingesting-footage/ingest-api/
+  - type: Documentation
+    url: https://shotstack.io/docs/guide/serving-assets/serve-api/
+  - type: Documentation
+    url: https://shotstack.io/product/create-api/
 common:
 - type: AgenticAccess
   url: agentic-access/shotstack-agentic-access.yml
