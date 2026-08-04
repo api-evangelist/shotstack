@@ -1,0 +1,22 @@
+{
+  "provider": "shotstack",
+  "sources": [
+    "shotstack-create-api-openapi.yml",
+    "shotstack-edit-api-openapi.yml",
+    "shotstack-ingest-api-openapi.yml",
+    "shotstack-serve-api-openapi.yml",
+    "shotstack-templates-api-openapi.yml"
+  ],
+  "outputs": [
+    "shotstack-create-api-openapi.yml",
+    "shotstack-edit-api-openapi.yml",
+    "shotstack-ingest-api-openapi.yml",
+    "shotstack-serve-api-openapi.yml",
+    "shotstack-templates-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
