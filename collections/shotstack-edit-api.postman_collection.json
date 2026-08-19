@@ -1,0 +1,642 @@
+{
+  "item": [
+    {
+      "id": "c938bc86-1f9a-4c0d-b50d-2b65d1a3dcde",
+      "name": "Edit",
+      "description": {
+        "content": "Render videos, images, and audio from a JSON edit specification.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85068643-cbfa-4d1d-bb09-f6e0a95e3336",
+          "name": "Queue a render",
+          "request": {
+            "name": "Queue a render",
+            "description": {
+              "content": "Queue a video, image, or audio for rendering from a JSON edit specification consisting of a timeline and an output. Returns a render ID used to poll status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "render"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timeline\": {\n    \"tracks\": [\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"soundtrack\": {\n      \"src\": \"<uri>\",\n      \"effect\": \"<string>\",\n      \"volume\": \"<number>\"\n    },\n    \"background\": \"<string>\",\n    \"fonts\": [\n      {\n        \"src\": \"<uri>\"\n      },\n      {\n        \"src\": \"<uri>\"\n      }\n    ]\n  },\n  \"output\": {\n    \"format\": \"<string>\",\n    \"resolution\": \"<string>\",\n    \"aspectRatio\": \"<string>\",\n    \"fps\": \"<number>\",\n    \"quality\": \"<string>\",\n    \"destinations\": [\n      {\n        \"provider\": \"<string>\"\n      },\n      {\n        \"provider\": \"<string>\"\n      }\n    ]\n  },\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ],\n  \"callback\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "993dd571-e09b-437b-a556-fa0df32298fe",
+              "name": "Render queued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "render"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeline\": {\n    \"tracks\": [\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"soundtrack\": {\n      \"src\": \"<uri>\",\n      \"effect\": \"<string>\",\n      \"volume\": \"<number>\"\n    },\n    \"background\": \"#000000\",\n    \"fonts\": [\n      {\n        \"src\": \"<uri>\"\n      },\n      {\n        \"src\": \"<uri>\"\n      }\n    ]\n  },\n  \"output\": {\n    \"format\": \"<string>\",\n    \"resolution\": \"<string>\",\n    \"aspectRatio\": \"<string>\",\n    \"fps\": \"<number>\",\n    \"quality\": \"<string>\",\n    \"destinations\": [\n      {\n        \"provider\": \"<string>\"\n      },\n      {\n        \"provider\": \"<string>\"\n      }\n    ]\n  },\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ],\n  \"callback\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"response\": {\n    \"message\": \"string\",\n    \"id\": \"f27aeb1f-3eb1-ddb9-2408-ef37cd618909\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e410f387-76b7-45ec-a95d-0f6dbb8c6ebb",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "render"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeline\": {\n    \"tracks\": [\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"soundtrack\": {\n      \"src\": \"<uri>\",\n      \"effect\": \"<string>\",\n      \"volume\": \"<number>\"\n    },\n    \"background\": \"#000000\",\n    \"fonts\": [\n      {\n        \"src\": \"<uri>\"\n      },\n      {\n        \"src\": \"<uri>\"\n      }\n    ]\n  },\n  \"output\": {\n    \"format\": \"<string>\",\n    \"resolution\": \"<string>\",\n    \"aspectRatio\": \"<string>\",\n    \"fps\": \"<number>\",\n    \"quality\": \"<string>\",\n    \"destinations\": [\n      {\n        \"provider\": \"<string>\"\n      },\n      {\n        \"provider\": \"<string>\"\n      }\n    ]\n  },\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ],\n  \"callback\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce9a42b4-12c6-4297-b323-1d32a29a209b",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "render"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeline\": {\n    \"tracks\": [\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"clips\": [\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          },\n          {\n            \"asset\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"start\": \"<number>\",\n            \"length\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fit\": \"<string>\",\n            \"scale\": \"<number>\",\n            \"position\": \"<string>\",\n            \"opacity\": \"<number>\",\n            \"transition\": {\n              \"in\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"out\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"effect\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"soundtrack\": {\n      \"src\": \"<uri>\",\n      \"effect\": \"<string>\",\n      \"volume\": \"<number>\"\n    },\n    \"background\": \"#000000\",\n    \"fonts\": [\n      {\n        \"src\": \"<uri>\"\n      },\n      {\n        \"src\": \"<uri>\"\n      }\n    ]\n  },\n  \"output\": {\n    \"format\": \"<string>\",\n    \"resolution\": \"<string>\",\n    \"aspectRatio\": \"<string>\",\n    \"fps\": \"<number>\",\n    \"quality\": \"<string>\",\n    \"destinations\": [\n      {\n        \"provider\": \"<string>\"\n      },\n      {\n        \"provider\": \"<string>\"\n      }\n    ]\n  },\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ],\n  \"callback\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2016e12e-4804-4ecd-824d-7c7f0f4081f5",
+          "name": "Get render status",
+          "request": {
+            "name": "Get render status",
+            "description": {
+              "content": "Retrieve the status, progress, and output URL of a render by its ID. Status values progress through queued, fetching, rendering, saving, done, and failed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "render",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data",
+                  "value": "false",
+                  "description": "Include the original edit JSON in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The render ID returned when the render was queued."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d9f107b-d7e0-4792-8a92-7222793891ec",
+              "name": "Render status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "render",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The render ID returned when the render was queued."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"response\": {\n    \"id\": \"7fd3a026-6146-b2db-a473-f71cf21e306c\",\n    \"owner\": \"string\",\n    \"status\": \"failed\",\n    \"url\": \"http://DgiurRGWcqC.qlWRJ.w9,24bEelTGwWbw8RmPMcB+Csq\",\n    \"poster\": \"http://OqUTKCJKJXUnqiLiPCPpgJO.fepkkAaKCtjljVnx1XRNEnj7z4uHyh\",\n    \"thumbnail\": \"https://EvrDYxXyxpL.mvbt1COkSFkxgeU.DEviyWhpLZpl,\",\n    \"duration\": 5227.626177815789,\n    \"renderTime\": 5886.989757210631,\n    \"created\": \"1982-05-29T03:14:46.250Z\",\n    \"updated\": \"1978-12-04T10:20:01.674Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "131ed28b-78d7-4a3b-bd56-87ce00a74bd2",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "render",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The render ID returned when the render was queued."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b9fe04c-1d69-47e7-a3fb-38c719484d31",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "render",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The render ID returned when the render was queued."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "970b725e-5d7e-44e2-8c16-edfa0aa86627",
+          "name": "Probe a media asset",
+          "request": {
+            "name": "Probe a media asset",
+            "description": {
+              "content": "Inspect the metadata of a media asset (duration, dimensions, codecs) using FFprobe. The asset URL must be URL-encoded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "probe",
+                ":url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "url",
+                  "description": "(Required) URL-encoded URL of the media asset to inspect."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36283f19-00ab-4040-8a70-443f4860fe91",
+              "name": "Asset metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "probe",
+                    ":url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) URL-encoded URL of the media asset to inspect."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"response\": {\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a955dbfc-5dd6-423e-b10e-463c26a446cb",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "probe",
+                    ":url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) URL-encoded URL of the media asset to inspect."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shotstack.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d301795a-3912-442e-90cf-71817bceb95f",
+    "name": "Shotstack Create Edit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.\n\nContact Support:\n Name: Shotstack Support",
+      "type": "text/plain"
+    }
+  }
+}

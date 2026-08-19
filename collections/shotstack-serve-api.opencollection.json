@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shotstack Create Serve API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Serve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/serve/v1/assets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset ID."
+              }
+            ]
+          },
+          "docs": "Retrieve the details and CDN URL of a hosted asset by asset ID."
+        },
+        {
+          "info": {
+            "name": "Delete an asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.shotstack.io/serve/v1/assets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset ID."
+              }
+            ]
+          },
+          "docs": "Delete an asset"
+        },
+        {
+          "info": {
+            "name": "Get assets by render ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/serve/v1/assets/render/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The render ID."
+              }
+            ]
+          },
+          "docs": "Retrieve all assets (video, thumbnail, poster) associated with a render ID."
+        },
+        {
+          "info": {
+            "name": "Transfer an asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/serve/v1/assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer a file from a URL to one or more hosting destinations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

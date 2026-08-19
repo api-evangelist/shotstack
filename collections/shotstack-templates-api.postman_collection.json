@@ -1,0 +1,1246 @@
+{
+  "item": [
+    {
+      "id": "09a64af6-5a39-45db-b4db-2555539216e7",
+      "name": "Templates",
+      "description": {
+        "content": "Manage and render reusable edit templates with merge fields.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0b95c6f-759d-42de-882c-74b757a93bfe",
+          "name": "Create a template",
+          "request": {
+            "name": "Create a template",
+            "description": {
+              "content": "Save an edit as a reusable template with optional merge fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"<string>\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "127e2cec-de3f-474a-8667-bee35bcb8701",
+              "name": "Template created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"#000000\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"response\": {\n    \"id\": \"3a9b2236-276a-428e-e37b-af5f979fdbdf\",\n    \"name\": \"string\",\n    \"template\": {\n      \"timeline\": {\n        \"tracks\": [\n          {\n            \"clips\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"clips\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"soundtrack\": {\n          \"src\": \"<uri>\",\n          \"effect\": \"<string>\",\n          \"volume\": \"<number>\"\n        },\n        \"background\": \"#000000\",\n        \"fonts\": [\n          {\n            \"src\": \"<uri>\"\n          },\n          {\n            \"src\": \"<uri>\"\n          }\n        ]\n      },\n      \"output\": {\n        \"format\": \"<string>\",\n        \"resolution\": \"<string>\",\n        \"aspectRatio\": \"<string>\",\n        \"fps\": \"<number>\",\n        \"quality\": \"<string>\",\n        \"destinations\": [\n          {\n            \"provider\": \"<string>\"\n          },\n          {\n            \"provider\": \"<string>\"\n          }\n        ]\n      },\n      \"merge\": [\n        {\n          \"find\": \"<string>\",\n          \"replace\": \"<string>\"\n        },\n        {\n          \"find\": \"<string>\",\n          \"replace\": \"<string>\"\n        }\n      ],\n      \"callback\": \"<uri>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2b718b1-62d3-4e66-b581-903bf2826e12",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"#000000\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22fb64cf-fdfa-40ce-8f0a-862d0db39008",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"#000000\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3df3674-4bca-4426-8ec7-0a0ca5043343",
+          "name": "List templates",
+          "request": {
+            "name": "List templates",
+            "description": {
+              "content": "List all templates for the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eac308f5-338c-4171-bc89-d43f6c35f4fc",
+              "name": "A list of templates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"response\": {\n    \"templates\": [\n      {\n        \"id\": \"c3bee77d-c61c-e290-7d32-d0aa48bc113d\",\n        \"name\": \"string\"\n      },\n      {\n        \"id\": \"f7e7b9f9-b7e0-0344-cbce-16ce99acf4d8\",\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e385525c-95f0-413f-8f9c-e14e3cbbc8a4",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d087adaf-ebdd-4457-8a57-62d1411f996d",
+          "name": "Get a template",
+          "request": {
+            "name": "Get a template",
+            "description": {},
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "templates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The template ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3cd7ed9-bd29-432b-bea6-c388dbaafb14",
+              "name": "A template.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"response\": {\n    \"id\": \"3a9b2236-276a-428e-e37b-af5f979fdbdf\",\n    \"name\": \"string\",\n    \"template\": {\n      \"timeline\": {\n        \"tracks\": [\n          {\n            \"clips\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"clips\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"soundtrack\": {\n          \"src\": \"<uri>\",\n          \"effect\": \"<string>\",\n          \"volume\": \"<number>\"\n        },\n        \"background\": \"#000000\",\n        \"fonts\": [\n          {\n            \"src\": \"<uri>\"\n          },\n          {\n            \"src\": \"<uri>\"\n          }\n        ]\n      },\n      \"output\": {\n        \"format\": \"<string>\",\n        \"resolution\": \"<string>\",\n        \"aspectRatio\": \"<string>\",\n        \"fps\": \"<number>\",\n        \"quality\": \"<string>\",\n        \"destinations\": [\n          {\n            \"provider\": \"<string>\"\n          },\n          {\n            \"provider\": \"<string>\"\n          }\n        ]\n      },\n      \"merge\": [\n        {\n          \"find\": \"<string>\",\n          \"replace\": \"<string>\"\n        },\n        {\n          \"find\": \"<string>\",\n          \"replace\": \"<string>\"\n        }\n      ],\n      \"callback\": \"<uri>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8540acc4-9ba4-461e-a6b0-0d943207ad34",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54483a6f-6ef2-4def-aa36-b6a42d8b67f2",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cceedb71-eeff-40c2-bbc2-d0cdcd80a93e",
+          "name": "Update a template",
+          "request": {
+            "name": "Update a template",
+            "description": {},
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "templates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The template ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"<string>\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "822c2744-dfc3-4f5d-aa91-86100e6df7f8",
+              "name": "Template updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"#000000\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"response\": {\n    \"id\": \"3a9b2236-276a-428e-e37b-af5f979fdbdf\",\n    \"name\": \"string\",\n    \"template\": {\n      \"timeline\": {\n        \"tracks\": [\n          {\n            \"clips\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"clips\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"soundtrack\": {\n          \"src\": \"<uri>\",\n          \"effect\": \"<string>\",\n          \"volume\": \"<number>\"\n        },\n        \"background\": \"#000000\",\n        \"fonts\": [\n          {\n            \"src\": \"<uri>\"\n          },\n          {\n            \"src\": \"<uri>\"\n          }\n        ]\n      },\n      \"output\": {\n        \"format\": \"<string>\",\n        \"resolution\": \"<string>\",\n        \"aspectRatio\": \"<string>\",\n        \"fps\": \"<number>\",\n        \"quality\": \"<string>\",\n        \"destinations\": [\n          {\n            \"provider\": \"<string>\"\n          },\n          {\n            \"provider\": \"<string>\"\n          }\n        ]\n      },\n      \"merge\": [\n        {\n          \"find\": \"<string>\",\n          \"replace\": \"<string>\"\n        },\n        {\n          \"find\": \"<string>\",\n          \"replace\": \"<string>\"\n        }\n      ],\n      \"callback\": \"<uri>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a04f88c-f137-450e-a040-5f0c326aefb0",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"#000000\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc2466d9-421e-4a9c-8ba9-9565311c855c",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"template\": {\n    \"timeline\": {\n      \"tracks\": [\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        {\n          \"clips\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      ],\n      \"soundtrack\": {\n        \"src\": \"<uri>\",\n        \"effect\": \"<string>\",\n        \"volume\": \"<number>\"\n      },\n      \"background\": \"#000000\",\n      \"fonts\": [\n        {\n          \"src\": \"<uri>\"\n        },\n        {\n          \"src\": \"<uri>\"\n        }\n      ]\n    },\n    \"output\": {\n      \"format\": \"<string>\",\n      \"resolution\": \"<string>\",\n      \"aspectRatio\": \"<string>\",\n      \"fps\": \"<number>\",\n      \"quality\": \"<string>\",\n      \"destinations\": [\n        {\n          \"provider\": \"<string>\"\n        },\n        {\n          \"provider\": \"<string>\"\n        }\n      ]\n    },\n    \"merge\": [\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      },\n      {\n        \"find\": \"<string>\",\n        \"replace\": \"<string>\"\n      }\n    ],\n    \"callback\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79aab2c4-0d12-4785-9287-78aec7626f14",
+          "name": "Delete a template",
+          "request": {
+            "name": "Delete a template",
+            "description": {},
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "templates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The template ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca973abb-4209-46e5-93d5-3467c39f72b5",
+              "name": "Template deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a4b2024-cff3-4afd-847e-f720a0620a1f",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3708c251-eaf5-49d0-a74e-fccb2dc2259b",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The template ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64442f4d-73b7-4c7b-abf8-56c0faa8033f",
+          "name": "Render a template",
+          "request": {
+            "name": "Render a template",
+            "description": {
+              "content": "Render an asset from a saved template, supplying optional merge fields to substitute variables in the template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edit",
+                "v1",
+                "templates",
+                "render"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee359048-8cca-4c3f-a888-1897b0785e4f",
+              "name": "Render queued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    "render"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"message\": \"string\",\n    \"id\": \"21a433c5-f210-282a-bb56-dfca04116129\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e166f38-d7bf-4f46-b08e-739969b1f972",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    "render"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d03d88c-ae05-4ec5-9784-15a9a244a6ed",
+              "name": "Missing or invalid x-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edit",
+                    "v1",
+                    "templates",
+                    "render"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"merge\": [\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    },\n    {\n      \"find\": \"<string>\",\n      \"replace\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"response\": {\n    \"error\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.shotstack.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a029a92-128f-4628-ab17-18d1b5af505e",
+    "name": "Shotstack Create Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.\n\nContact Support:\n Name: Shotstack Support",
+      "type": "text/plain"
+    }
+  }
+}

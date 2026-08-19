@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shotstack Create Edit API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Queue a render",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/edit/v1/render",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queue a video, image, or audio for rendering from a JSON edit specification consisting of a timeline and an output. Returns a render ID used to poll status."
+        },
+        {
+          "info": {
+            "name": "Get render status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/edit/v1/render/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The render ID returned when the render was queued."
+              },
+              {
+                "name": "data",
+                "value": "",
+                "type": "query",
+                "description": "Include the original edit JSON in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve the status, progress, and output URL of a render by its ID. Status values progress through queued, fetching, rendering, saving, done, and failed."
+        },
+        {
+          "info": {
+            "name": "Probe a media asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/edit/v1/probe/:url",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "path",
+                "description": "URL-encoded URL of the media asset to inspect."
+              }
+            ]
+          },
+          "docs": "Inspect the metadata of a media asset (duration, dimensions, codecs) using FFprobe. The asset URL must be URL-encoded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

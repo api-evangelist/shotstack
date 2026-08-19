@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shotstack Create API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Create",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate an AI asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.shotstack.io/create/v1/assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate an AI asset (text-to-speech, text-to-image, image-to-video, or text generation) using a built-in or third-party provider. Returns an asset ID to poll for the generated, hosted asset."
+        },
+        {
+          "info": {
+            "name": "Get a generated asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.shotstack.io/create/v1/assets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset ID."
+              }
+            ]
+          },
+          "docs": "Retrieve the status and URL of a generated AI asset by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
