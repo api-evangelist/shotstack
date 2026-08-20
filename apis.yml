@@ -36,7 +36,8 @@ apis:
   description: Generate AI assets such as text-to-speech and text-to-image.
   humanURL: https://shotstack.io/docs/api/
   baseURL: https://api.shotstack.io/edit/v1
-  tags:
+  tags: []
+  tags_raw:
   - Create
   properties:
   - type: OpenAPI
