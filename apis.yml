@@ -7,6 +7,18 @@ description: Shotstack is a cloud video-editing platform that turns a JSON timel
   from a JSON edit specification and templates, the Ingest API uploads and transforms
   source footage, the Serve API hosts and delivers generated assets, and the Create
   API generates AI assets such as text-to-speech, text-to-image, and image-to-video.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
