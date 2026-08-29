@@ -1,0 +1,25 @@
+slug: shotstack
+provider: Shotstack
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Ingest
+  spec_file: shotstack-ingest-api-openapi.yml
+  capability_id: BC-3710.10
+  capability_id_l1: BC-3710
+  capability_name: Asset Ingest & Quality Control
+  confidence: 0.8
+  evidence: POST /ingest/v1/sources  fetchSource  Ingest a source from a URL; POST /ingest/v1/upload  requestUpload  Request
+    a direct upload
+  reason: Operations onboard source media into the platform and manage the resulting source records, which
+    is asset ingest in a media asset management sense.

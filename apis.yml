@@ -175,6 +175,9 @@ apis:
   - type: Documentation
     url: https://shotstack.io/product/create-api/
 common:
+- type: CapabilityMap
+  url: capabilities/shotstack-capability-edges.yml
+  name: Shotstack Business Capability Map
 - type: AgenticAccess
   url: agentic-access/shotstack-agentic-access.yml
 - type: DomainSecurity
