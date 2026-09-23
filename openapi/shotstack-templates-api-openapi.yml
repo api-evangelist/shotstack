@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Shotstack Create Templates API
+  title: Shotstack Templates API
   description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
   termsOfService: https://shotstack.io/terms/
   contact:
@@ -138,7 +138,103 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    QueuedResponse:
+    Clip:
+      type: object
+      required:
+      - asset
+      - start
+      - length
+      properties:
+        asset:
+          $ref: '#/components/schemas/Asset'
+        start:
+          type: number
+          description: Start time on the timeline in seconds.
+        length:
+          oneOf:
+          - type: number
+          - type: string
+          description: Duration of the clip in seconds, or "auto"/"end".
+        fit:
+          type: string
+          enum:
+          - crop
+          - cover
+          - contain
+          - none
+        scale:
+          type: number
+        position:
+          type: string
+          enum:
+          - top
+          - topRight
+          - right
+          - bottomRight
+          - bottom
+          - bottomLeft
+          - left
+          - topLeft
+          - center
+        opacity:
+          type: number
+        transition:
+          type: object
+          properties:
+            in:
+              type: string
+            out:
+              type: string
+        effect:
+          type: string
+    TemplateRenderRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The template ID to render.
+        merge:
+          type: array
+          items:
+            $ref: '#/components/schemas/MergeField'
+    Edit:
+      type: object
+      required:
+      - timeline
+      - output
+      properties:
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+        output:
+          $ref: '#/components/schemas/Output'
+        merge:
+          type: array
+          description: Find-and-replace merge fields applied before rendering.
+          items:
+            $ref: '#/components/schemas/MergeField'
+        callback:
+          type: string
+          format: uri
+          description: HTTPS webhook URL called when the render status changes.
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
+    TemplateResponse:
       type: object
       properties:
         success:
@@ -148,21 +244,13 @@ components:
         response:
           type: object
           properties:
-            message:
-              type: string
             id:
               type: string
               format: uuid
-    Template:
-      type: object
-      required:
-      - name
-      - template
-      properties:
-        name:
-          type: string
-        template:
-          $ref: '#/components/schemas/Edit'
+            name:
+              type: string
+            template:
+              $ref: '#/components/schemas/Edit'
     Timeline:
       type: object
       required:
@@ -187,6 +275,61 @@ components:
           description: Layers of clips composited from bottom to top.
           items:
             $ref: '#/components/schemas/Track'
+    QueuedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            message:
+              type: string
+            id:
+              type: string
+              format: uuid
+    MergeField:
+      type: object
+      properties:
+        find:
+          type: string
+        replace:
+          type: string
+    Soundtrack:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+        effect:
+          type: string
+          enum:
+          - fadeIn
+          - fadeOut
+          - fadeInFadeOut
+        volume:
+          type: number
+    Track:
+      type: object
+      required:
+      - clips
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clip'
+    Template:
+      type: object
+      required:
+      - name
+      - template
+      properties:
+        name:
+          type: string
+        template:
+          $ref: '#/components/schemas/Edit'
     TemplateListResponse:
       type: object
       properties:
@@ -205,18 +348,34 @@ components:
                     format: uuid
                   name:
                     type: string
-    Soundtrack:
+    Asset:
       type: object
+      description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
+      required:
+      - type
       properties:
+        type:
+          type: string
+          enum:
+          - video
+          - image
+          - audio
+          - title
+          - html
+          - luma
+          - caption
+          - text-to-speech
+          - text-to-image
+          - image-to-video
         src:
           type: string
           format: uri
-        effect:
+          description: Source URL for video, image, audio, and luma assets.
+        text:
           type: string
-          enum:
-          - fadeIn
-          - fadeOut
-          - fadeInFadeOut
+          description: Text content for title, caption, and AI text-based assets.
+        trim:
+          type: number
         volume:
           type: number
     Output:
@@ -280,165 +439,6 @@ components:
                 - googledrive
                 - mux
                 - vimeo
-    Asset:
-      type: object
-      description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          enum:
-          - video
-          - image
-          - audio
-          - title
-          - html
-          - luma
-          - caption
-          - text-to-speech
-          - text-to-image
-          - image-to-video
-        src:
-          type: string
-          format: uri
-          description: Source URL for video, image, audio, and luma assets.
-        text:
-          type: string
-          description: Text content for title, caption, and AI text-based assets.
-        trim:
-          type: number
-        volume:
-          type: number
-    Edit:
-      type: object
-      required:
-      - timeline
-      - output
-      properties:
-        timeline:
-          $ref: '#/components/schemas/Timeline'
-        output:
-          $ref: '#/components/schemas/Output'
-        merge:
-          type: array
-          description: Find-and-replace merge fields applied before rendering.
-          items:
-            $ref: '#/components/schemas/MergeField'
-        callback:
-          type: string
-          format: uri
-          description: HTTPS webhook URL called when the render status changes.
-    TemplateResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-            template:
-              $ref: '#/components/schemas/Edit'
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
-    TemplateRenderRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The template ID to render.
-        merge:
-          type: array
-          items:
-            $ref: '#/components/schemas/MergeField'
-    MergeField:
-      type: object
-      properties:
-        find:
-          type: string
-        replace:
-          type: string
-    Clip:
-      type: object
-      required:
-      - asset
-      - start
-      - length
-      properties:
-        asset:
-          $ref: '#/components/schemas/Asset'
-        start:
-          type: number
-          description: Start time on the timeline in seconds.
-        length:
-          oneOf:
-          - type: number
-          - type: string
-          description: Duration of the clip in seconds, or "auto"/"end".
-        fit:
-          type: string
-          enum:
-          - crop
-          - cover
-          - contain
-          - none
-        scale:
-          type: number
-        position:
-          type: string
-          enum:
-          - top
-          - topRight
-          - right
-          - bottomRight
-          - bottom
-          - bottomLeft
-          - left
-          - topLeft
-          - center
-        opacity:
-          type: number
-        transition:
-          type: object
-          properties:
-            in:
-              type: string
-            out:
-              type: string
-        effect:
-          type: string
-    Track:
-      type: object
-      required:
-      - clips
-      properties:
-        clips:
-          type: array
-          items:
-            $ref: '#/components/schemas/Clip'
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -446,14 +446,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    Unauthorized:
+      description: Missing or invalid x-api-key.
       content:
         application/json:
           schema:

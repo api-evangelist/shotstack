@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Shotstack Create API
   description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
@@ -61,6 +61,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     GenerateAssetResponse:
       type: object
@@ -102,21 +121,6 @@ components:
                 updated:
                   type: string
                   format: date-time
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
     GenerateAssetRequest:
       type: object
       required:
@@ -152,6 +156,21 @@ components:
               type: string
             language:
               type: string
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
   parameters:
     AssetId:
       name: id
@@ -161,25 +180,6 @@ components:
       schema:
         type: string
         format: uuid
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Shotstack Create Ingest API
+  title: Shotstack Ingest API
   description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
   termsOfService: https://shotstack.io/terms/
   contact:
@@ -105,13 +105,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SourceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceResponse'
     SourceRequest:
       type: object
       required:
@@ -191,6 +184,13 @@ components:
                 updated:
                   type: string
                   format: date-time
+    SourceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceResponse'
     UploadResponse:
       type: object
       properties:
@@ -220,14 +220,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    Unauthorized:
+      description: Missing or invalid x-api-key.
       content:
         application/json:
           schema:

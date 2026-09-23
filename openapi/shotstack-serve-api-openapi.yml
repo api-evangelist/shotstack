@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Shotstack Create Serve API
+  title: Shotstack Serve API
   description: Shotstack is a cloud video-editing platform that renders video, image, and audio assets from a JSON edit specification. This document covers the Edit API (render and templates), the Ingest API (source assets), the Serve API (asset hosting and delivery), and the Create API (AI-generated assets). All endpoints authenticate with an `x-api-key` header. Each API is available in a `v1` (production) and `stage` (sandbox) environment.
   termsOfService: https://shotstack.io/terms/
   contact:
@@ -101,15 +101,25 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    AssetId:
-      name: id
-      in: path
-      required: true
-      description: The asset ID.
-      schema:
-        type: string
-        format: uuid
+  responses:
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     AssetListResponse:
       type: object
@@ -118,29 +128,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AssetResponse'
-    TransferRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the file to transfer.
-        destinations:
-          type: array
-          items:
-            type: object
-            properties:
-              provider:
-                type: string
-                enum:
-                - shotstack
-                - s3
-                - googlecloudstorage
-                - googledrive
-                - mux
-                - vimeo
     Error:
       type: object
       properties:
@@ -200,25 +187,38 @@ components:
                 updated:
                   type: string
                   format: date-time
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    TransferRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the file to transfer.
+        destinations:
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+                enum:
+                - shotstack
+                - s3
+                - googlecloudstorage
+                - googledrive
+                - mux
+                - vimeo
+  parameters:
+    AssetId:
+      name: id
+      in: path
+      required: true
+      description: The asset ID.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     apiKey:
       type: apiKey
