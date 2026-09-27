@@ -105,6 +105,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
     SourceRequest:
       type: object
       required:
@@ -132,21 +147,35 @@ components:
               properties:
                 format:
                   type: string
-    Error:
+    UploadResponse:
       type: object
       properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
+        data:
           type: object
           properties:
-            error:
+            type:
               type: string
-            code:
+              example: upload
+            id:
               type: string
+              format: uuid
+            attributes:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                url:
+                  type: string
+                  format: uri
+                  description: Signed URL to PUT the file to.
+    SourceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceResponse'
     SourceResponse:
       type: object
       properties:
@@ -184,44 +213,18 @@ components:
                 updated:
                   type: string
                   format: date-time
-    SourceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceResponse'
-    UploadResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              example: upload
-            id:
-              type: string
-              format: uuid
-            attributes:
-              type: object
-              properties:
-                id:
-                  type: string
-                  format: uuid
-                url:
-                  type: string
-                  format: uri
-                  description: Signed URL to PUT the file to.
+  parameters:
+    SourceId:
+      name: id
+      in: path
+      required: true
+      description: The source ID.
+      schema:
+        type: string
+        format: uuid
   responses:
     NotFound:
       description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
@@ -232,15 +235,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    SourceId:
-      name: id
-      in: path
-      required: true
-      description: The source ID.
-      schema:
-        type: string
-        format: uuid
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

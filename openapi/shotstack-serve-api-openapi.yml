@@ -101,33 +101,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    AssetListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetResponse'
     Error:
       type: object
       properties:
@@ -143,6 +117,36 @@ components:
               type: string
             code:
               type: string
+    AssetListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetResponse'
+    TransferRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the file to transfer.
+        destinations:
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+                enum:
+                - shotstack
+                - s3
+                - googlecloudstorage
+                - googledrive
+                - mux
+                - vimeo
     AssetResponse:
       type: object
       properties:
@@ -187,29 +191,25 @@ components:
                 updated:
                   type: string
                   format: date-time
-    TransferRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the file to transfer.
-        destinations:
-          type: array
-          items:
-            type: object
-            properties:
-              provider:
-                type: string
-                enum:
-                - shotstack
-                - s3
-                - googlecloudstorage
-                - googledrive
-                - mux
-                - vimeo
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     AssetId:
       name: id

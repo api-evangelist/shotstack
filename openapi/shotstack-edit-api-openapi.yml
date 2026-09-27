@@ -98,6 +98,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
     Clip:
       type: object
       required:
@@ -147,25 +162,6 @@ components:
               type: string
         effect:
           type: string
-    Edit:
-      type: object
-      required:
-      - timeline
-      - output
-      properties:
-        timeline:
-          $ref: '#/components/schemas/Timeline'
-        output:
-          $ref: '#/components/schemas/Output'
-        merge:
-          type: array
-          description: Find-and-replace merge fields applied before rendering.
-          items:
-            $ref: '#/components/schemas/MergeField'
-        callback:
-          type: string
-          format: uri
-          description: HTTPS webhook URL called when the render status changes.
     Timeline:
       type: object
       required:
@@ -200,42 +196,6 @@ components:
           properties:
             metadata:
               type: object
-    QueuedResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            message:
-              type: string
-            id:
-              type: string
-              format: uuid
-    MergeField:
-      type: object
-      properties:
-        find:
-          type: string
-        replace:
-          type: string
-    Soundtrack:
-      type: object
-      properties:
-        src:
-          type: string
-          format: uri
-        effect:
-          type: string
-          enum:
-          - fadeIn
-          - fadeOut
-          - fadeInFadeOut
-        volume:
-          type: number
     RenderResponse:
       type: object
       properties:
@@ -279,30 +239,6 @@ components:
             updated:
               type: string
               format: date-time
-    Track:
-      type: object
-      required:
-      - clips
-      properties:
-        clips:
-          type: array
-          items:
-            $ref: '#/components/schemas/Clip'
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
     Asset:
       type: object
       description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
@@ -333,6 +269,22 @@ components:
           type: number
         volume:
           type: number
+    MergeField:
+      type: object
+      properties:
+        find:
+          type: string
+        replace:
+          type: string
+    Track:
+      type: object
+      required:
+      - clips
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clip'
     Output:
       type: object
       required:
@@ -394,6 +346,54 @@ components:
                 - googledrive
                 - mux
                 - vimeo
+    Soundtrack:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+        effect:
+          type: string
+          enum:
+          - fadeIn
+          - fadeOut
+          - fadeInFadeOut
+        volume:
+          type: number
+    QueuedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            message:
+              type: string
+            id:
+              type: string
+              format: uuid
+    Edit:
+      type: object
+      required:
+      - timeline
+      - output
+      properties:
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+        output:
+          $ref: '#/components/schemas/Output'
+        merge:
+          type: array
+          description: Find-and-replace merge fields applied before rendering.
+          items:
+            $ref: '#/components/schemas/MergeField'
+        callback:
+          type: string
+          format: uri
+          description: HTTPS webhook URL called when the render status changes.
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -401,14 +401,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    Unauthorized:
+      description: Missing or invalid x-api-key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:

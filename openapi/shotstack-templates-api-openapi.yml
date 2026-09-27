@@ -138,6 +138,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
     Clip:
       type: object
       required:
@@ -187,70 +202,6 @@ components:
               type: string
         effect:
           type: string
-    TemplateRenderRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The template ID to render.
-        merge:
-          type: array
-          items:
-            $ref: '#/components/schemas/MergeField'
-    Edit:
-      type: object
-      required:
-      - timeline
-      - output
-      properties:
-        timeline:
-          $ref: '#/components/schemas/Timeline'
-        output:
-          $ref: '#/components/schemas/Output'
-        merge:
-          type: array
-          description: Find-and-replace merge fields applied before rendering.
-          items:
-            $ref: '#/components/schemas/MergeField'
-        callback:
-          type: string
-          format: uri
-          description: HTTPS webhook URL called when the render status changes.
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
-    TemplateResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-            template:
-              $ref: '#/components/schemas/Edit'
     Timeline:
       type: object
       required:
@@ -275,51 +226,6 @@ components:
           description: Layers of clips composited from bottom to top.
           items:
             $ref: '#/components/schemas/Track'
-    QueuedResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            message:
-              type: string
-            id:
-              type: string
-              format: uuid
-    MergeField:
-      type: object
-      properties:
-        find:
-          type: string
-        replace:
-          type: string
-    Soundtrack:
-      type: object
-      properties:
-        src:
-          type: string
-          format: uri
-        effect:
-          type: string
-          enum:
-          - fadeIn
-          - fadeOut
-          - fadeInFadeOut
-        volume:
-          type: number
-    Track:
-      type: object
-      required:
-      - clips
-      properties:
-        clips:
-          type: array
-          items:
-            $ref: '#/components/schemas/Clip'
     Template:
       type: object
       required:
@@ -330,24 +236,6 @@ components:
           type: string
         template:
           $ref: '#/components/schemas/Edit'
-    TemplateListResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        response:
-          type: object
-          properties:
-            templates:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                  name:
-                    type: string
     Asset:
       type: object
       description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
@@ -378,6 +266,70 @@ components:
           type: number
         volume:
           type: number
+    TemplateRenderRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The template ID to render.
+        merge:
+          type: array
+          items:
+            $ref: '#/components/schemas/MergeField'
+    MergeField:
+      type: object
+      properties:
+        find:
+          type: string
+        replace:
+          type: string
+    TemplateListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        response:
+          type: object
+          properties:
+            templates:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+    TemplateResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            template:
+              $ref: '#/components/schemas/Edit'
+    Track:
+      type: object
+      required:
+      - clips
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clip'
     Output:
       type: object
       required:
@@ -439,15 +391,66 @@ components:
                 - googledrive
                 - mux
                 - vimeo
+    Soundtrack:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+        effect:
+          type: string
+          enum:
+          - fadeIn
+          - fadeOut
+          - fadeInFadeOut
+        volume:
+          type: number
+    QueuedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            message:
+              type: string
+            id:
+              type: string
+              format: uuid
+    Edit:
+      type: object
+      required:
+      - timeline
+      - output
+      properties:
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+        output:
+          $ref: '#/components/schemas/Output'
+        merge:
+          type: array
+          description: Find-and-replace merge fields applied before rendering.
+          items:
+            $ref: '#/components/schemas/MergeField'
+        callback:
+          type: string
+          format: uri
+          description: HTTPS webhook URL called when the render status changes.
+  parameters:
+    TemplateId:
+      name: id
+      in: path
+      required: true
+      description: The template ID.
+      schema:
+        type: string
+        format: uuid
   responses:
     NotFound:
       description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
@@ -458,15 +461,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    TemplateId:
-      name: id
-      in: path
-      required: true
-      description: The template ID.
-      schema:
-        type: string
-        format: uuid
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

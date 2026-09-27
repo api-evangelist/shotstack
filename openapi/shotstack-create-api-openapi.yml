@@ -61,26 +61,57 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid x-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
+    GenerateAssetRequest:
+      type: object
+      required:
+      - provider
+      - options
+      properties:
+        provider:
+          type: string
+          description: The generation provider.
+          enum:
+          - shotstack
+          - elevenlabs
+          - stability-ai
+          - openai
+        options:
+          type: object
+          required:
+          - type
+          properties:
+            type:
+              type: string
+              enum:
+              - text-to-speech
+              - text-to-image
+              - image-to-video
+              - text-generation
+            text:
+              type: string
+              description: Prompt or text input for the generation.
+            prompt:
+              type: string
+            voice:
+              type: string
+            language:
+              type: string
     GenerateAssetResponse:
       type: object
       properties:
@@ -121,56 +152,25 @@ components:
                 updated:
                   type: string
                   format: date-time
-    GenerateAssetRequest:
-      type: object
-      required:
-      - provider
-      - options
-      properties:
-        provider:
-          type: string
-          description: The generation provider.
-          enum:
-          - shotstack
-          - elevenlabs
-          - stability-ai
-          - openai
-        options:
-          type: object
-          required:
-          - type
-          properties:
-            type:
-              type: string
-              enum:
-              - text-to-speech
-              - text-to-image
-              - image-to-video
-              - text-generation
-            text:
-              type: string
-              description: Prompt or text input for the generation.
-            prompt:
-              type: string
-            voice:
-              type: string
-            language:
-              type: string
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid x-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     AssetId:
       name: id
