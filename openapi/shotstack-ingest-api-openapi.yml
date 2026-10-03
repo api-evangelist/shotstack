@@ -120,33 +120,6 @@ components:
               type: string
             code:
               type: string
-    SourceRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the source file to fetch and store.
-        outputs:
-          type: object
-          description: Optional renditions and/or transcription to generate.
-          properties:
-            renditions:
-              type: array
-              items:
-                type: object
-                properties:
-                  format:
-                    type: string
-                  resolution:
-                    type: string
-            transcription:
-              type: object
-              properties:
-                format:
-                  type: string
     UploadResponse:
       type: object
       properties:
@@ -169,13 +142,6 @@ components:
                   type: string
                   format: uri
                   description: Signed URL to PUT the file to.
-    SourceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceResponse'
     SourceResponse:
       type: object
       properties:
@@ -213,18 +179,43 @@ components:
                 updated:
                   type: string
                   format: date-time
-  parameters:
-    SourceId:
-      name: id
-      in: path
-      required: true
-      description: The source ID.
-      schema:
-        type: string
-        format: uuid
+    SourceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceResponse'
+    SourceRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the source file to fetch and store.
+        outputs:
+          type: object
+          description: Optional renditions and/or transcription to generate.
+          properties:
+            renditions:
+              type: array
+              items:
+                type: object
+                properties:
+                  format:
+                    type: string
+                  resolution:
+                    type: string
+            transcription:
+              type: object
+              properties:
+                format:
+                  type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
@@ -235,12 +226,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    SourceId:
+      name: id
+      in: path
+      required: true
+      description: The source ID.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     apiKey:
       type: apiKey

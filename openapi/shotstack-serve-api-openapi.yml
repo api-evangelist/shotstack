@@ -124,29 +124,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AssetResponse'
-    TransferRequest:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the file to transfer.
-        destinations:
-          type: array
-          items:
-            type: object
-            properties:
-              provider:
-                type: string
-                enum:
-                - shotstack
-                - s3
-                - googlecloudstorage
-                - googledrive
-                - mux
-                - vimeo
     AssetResponse:
       type: object
       properties:
@@ -191,9 +168,32 @@ components:
                 updated:
                   type: string
                   format: date-time
+    TransferRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the file to transfer.
+        destinations:
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+                enum:
+                - shotstack
+                - s3
+                - googlecloudstorage
+                - googledrive
+                - mux
+                - vimeo
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
@@ -204,8 +204,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

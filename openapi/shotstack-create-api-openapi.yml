@@ -77,41 +77,6 @@ components:
               type: string
             code:
               type: string
-    GenerateAssetRequest:
-      type: object
-      required:
-      - provider
-      - options
-      properties:
-        provider:
-          type: string
-          description: The generation provider.
-          enum:
-          - shotstack
-          - elevenlabs
-          - stability-ai
-          - openai
-        options:
-          type: object
-          required:
-          - type
-          properties:
-            type:
-              type: string
-              enum:
-              - text-to-speech
-              - text-to-image
-              - image-to-video
-              - text-generation
-            text:
-              type: string
-              description: Prompt or text input for the generation.
-            prompt:
-              type: string
-            voice:
-              type: string
-            language:
-              type: string
     GenerateAssetResponse:
       type: object
       properties:
@@ -152,9 +117,44 @@ components:
                 updated:
                   type: string
                   format: date-time
+    GenerateAssetRequest:
+      type: object
+      required:
+      - provider
+      - options
+      properties:
+        provider:
+          type: string
+          description: The generation provider.
+          enum:
+          - shotstack
+          - elevenlabs
+          - stability-ai
+          - openai
+        options:
+          type: object
+          required:
+          - type
+          properties:
+            type:
+              type: string
+              enum:
+              - text-to-speech
+              - text-to-image
+              - image-to-video
+              - text-generation
+            text:
+              type: string
+              description: Prompt or text input for the generation.
+            prompt:
+              type: string
+            voice:
+              type: string
+            language:
+              type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
@@ -165,8 +165,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
