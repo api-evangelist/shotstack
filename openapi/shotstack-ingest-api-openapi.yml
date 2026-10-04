@@ -105,21 +105,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
     UploadResponse:
       type: object
       properties:
@@ -179,13 +164,6 @@ components:
                 updated:
                   type: string
                   format: date-time
-    SourceListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceResponse'
     SourceRequest:
       type: object
       required:
@@ -213,6 +191,28 @@ components:
               properties:
                 format:
                   type: string
+    SourceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceResponse'
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
   responses:
     BadRequest:
       description: The request was malformed or failed validation.

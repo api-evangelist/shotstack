@@ -138,65 +138,30 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            error:
-              type: string
-            code:
-              type: string
-    Edit:
+    Timeline:
       type: object
       required:
-      - timeline
-      - output
+      - tracks
       properties:
-        timeline:
-          $ref: '#/components/schemas/Timeline'
-        output:
-          $ref: '#/components/schemas/Output'
-        merge:
+        soundtrack:
+          $ref: '#/components/schemas/Soundtrack'
+        background:
+          type: string
+          description: Hex color of the background canvas.
+          example: '#000000'
+        fonts:
           type: array
-          description: Find-and-replace merge fields applied before rendering.
           items:
-            $ref: '#/components/schemas/MergeField'
-        callback:
-          type: string
-          format: uri
-          description: HTTPS webhook URL called when the render status changes.
-    Template:
-      type: object
-      required:
-      - name
-      - template
-      properties:
-        name:
-          type: string
-        template:
-          $ref: '#/components/schemas/Edit'
-    QueuedResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        response:
-          type: object
-          properties:
-            message:
-              type: string
-            id:
-              type: string
-              format: uuid
+            type: object
+            properties:
+              src:
+                type: string
+                format: uri
+        tracks:
+          type: array
+          description: Layers of clips composited from bottom to top.
+          items:
+            $ref: '#/components/schemas/Track'
     Clip:
       type: object
       required:
@@ -246,6 +211,123 @@ components:
               type: string
         effect:
           type: string
+    Track:
+      type: object
+      required:
+      - clips
+      properties:
+        clips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clip'
+    Soundtrack:
+      type: object
+      properties:
+        src:
+          type: string
+          format: uri
+        effect:
+          type: string
+          enum:
+          - fadeIn
+          - fadeOut
+          - fadeInFadeOut
+        volume:
+          type: number
+    QueuedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+          properties:
+            message:
+              type: string
+            id:
+              type: string
+              format: uuid
+    MergeField:
+      type: object
+      properties:
+        find:
+          type: string
+        replace:
+          type: string
+    Template:
+      type: object
+      required:
+      - name
+      - template
+      properties:
+        name:
+          type: string
+        template:
+          $ref: '#/components/schemas/Edit'
+    TemplateRenderRequest:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The template ID to render.
+        merge:
+          type: array
+          items:
+            $ref: '#/components/schemas/MergeField'
+    Asset:
+      type: object
+      description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - video
+          - image
+          - audio
+          - title
+          - html
+          - luma
+          - caption
+          - text-to-speech
+          - text-to-image
+          - image-to-video
+        src:
+          type: string
+          format: uri
+          description: Source URL for video, image, audio, and luma assets.
+        text:
+          type: string
+          description: Text content for title, caption, and AI text-based assets.
+        trim:
+          type: number
+        volume:
+          type: number
+    Edit:
+      type: object
+      required:
+      - timeline
+      - output
+      properties:
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+        output:
+          $ref: '#/components/schemas/Output'
+        merge:
+          type: array
+          description: Find-and-replace merge fields applied before rendering.
+          items:
+            $ref: '#/components/schemas/MergeField'
+        callback:
+          type: string
+          format: uri
+          description: HTTPS webhook URL called when the render status changes.
     Output:
       type: object
       required:
@@ -307,43 +389,6 @@ components:
                 - googledrive
                 - mux
                 - vimeo
-    Timeline:
-      type: object
-      required:
-      - tracks
-      properties:
-        soundtrack:
-          $ref: '#/components/schemas/Soundtrack'
-        background:
-          type: string
-          description: Hex color of the background canvas.
-          example: '#000000'
-        fonts:
-          type: array
-          items:
-            type: object
-            properties:
-              src:
-                type: string
-                format: uri
-        tracks:
-          type: array
-          description: Layers of clips composited from bottom to top.
-          items:
-            $ref: '#/components/schemas/Track'
-    TemplateRenderRequest:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The template ID to render.
-        merge:
-          type: array
-          items:
-            $ref: '#/components/schemas/MergeField'
     TemplateResponse:
       type: object
       properties:
@@ -361,66 +406,21 @@ components:
               type: string
             template:
               $ref: '#/components/schemas/Edit'
-    Track:
-      type: object
-      required:
-      - clips
-      properties:
-        clips:
-          type: array
-          items:
-            $ref: '#/components/schemas/Clip'
-    Soundtrack:
+    Error:
       type: object
       properties:
-        src:
+        success:
+          type: boolean
+          example: false
+        message:
           type: string
-          format: uri
-        effect:
-          type: string
-          enum:
-          - fadeIn
-          - fadeOut
-          - fadeInFadeOut
-        volume:
-          type: number
-    Asset:
-      type: object
-      description: A clip asset. The "type" discriminates between video, image, audio, title, html, luma, caption, and the AI generative asset types (text-to-speech, text-to-image, image-to-video).
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          enum:
-          - video
-          - image
-          - audio
-          - title
-          - html
-          - luma
-          - caption
-          - text-to-speech
-          - text-to-image
-          - image-to-video
-        src:
-          type: string
-          format: uri
-          description: Source URL for video, image, audio, and luma assets.
-        text:
-          type: string
-          description: Text content for title, caption, and AI text-based assets.
-        trim:
-          type: number
-        volume:
-          type: number
-    MergeField:
-      type: object
-      properties:
-        find:
-          type: string
-        replace:
-          type: string
+        response:
+          type: object
+          properties:
+            error:
+              type: string
+            code:
+              type: string
     TemplateListResponse:
       type: object
       properties:
