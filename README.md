@@ -1,4 +1,4 @@
-# Shotstack (shotstack)
+# Shotstack
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,139 +66,123 @@
 
 Shotstack is a cloud video-editing platform that turns a JSON timeline into a rendered video, image, or audio file. The Edit API renders programmatically from a JSON edit specification and templates, the Ingest API uploads and transforms source footage, the Serve API hosts and delivers generated assets, and the Create API generates AI assets such as text-to-speech, text-to-image, and image-to-video.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/shotstack/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/shotstack/refs/heads/main/apis.yml)
+**Areas:** Video · Video Editing · Media · Rendering · Generative AI
 
-## Tags
+## Shotstack on APIs.io
 
-- Video
-- Video Editing
-- Media
-- Rendering
-- Generative AI
+Everything profiled for Shotstack is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/shotstack/](https://apis.io/providers/shotstack/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Shotstack Create API](https://apis.io/apis/shotstack/shotstack-create-api/) — Generate AI assets such as text-to-speech and text-to-image.
+- [Shotstack Edit API](https://apis.io/apis/shotstack/shotstack-edit-api/) — Render videos, images, and audio from a JSON edit specification.
+- [Shotstack Ingest API](https://apis.io/apis/shotstack/shotstack-ingest-api/) — Upload, store, and transform source assets.
+- [Shotstack Serve API](https://apis.io/apis/shotstack/shotstack-serve-api/) — Inspect, manage, and deliver hosted assets.
+- [Shotstack Templates API](https://apis.io/apis/shotstack/shotstack-templates-api/) — Manage and render reusable edit templates with merge fields.
 
-## APIs
+### Published properties
 
-### Shotstack Edit (Render) API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Queue a video, image, or audio render from a JSON edit specification (timeline, tracks, clips, output) and poll render status by ID. Supports AI generative assets (text-to-speech, text-to-image, image-to-video) embedded in the timeline.
+#### Agentic access (1)
 
-- **Human URL:** [https://shotstack.io/docs/api/](https://shotstack.io/docs/api/)
-- **Base URL:** `https://api.shotstack.io/edit/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Shotstack Agentic Access](https://apis.io/agentic-access/shotstack/shotstack-agentic-access/)
 
-- Video Editing
-- Rendering
-- Timeline
+#### Collections (6)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://shotstack.io/docs/guide/architecture/apis/)
-- [API Reference](https://shotstack.io/docs/api/)
-- [OpenAPI](openapi/shotstack-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shotstack.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shotstack.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Shotstack API](https://apis.io/collections/shotstack/open-shotstack/)
+- [Shotstack Create API](https://apis.io/collections/shotstack/open-shotstack-create-api/)
+- [Shotstack Create Edit API](https://apis.io/collections/shotstack/open-shotstack-edit-api/)
+- [Shotstack Create Ingest API](https://apis.io/collections/shotstack/open-shotstack-ingest-api/)
+- [Shotstack Create Serve API](https://apis.io/collections/shotstack/open-shotstack-serve-api/)
+- [Shotstack Create Templates API](https://apis.io/collections/shotstack/open-shotstack-templates-api/)
 
-### Shotstack Templates API
+#### Security (2)
 
-Save, list, retrieve, update, and delete reusable edit templates, then render them with merge-field variable substitution for data-driven, automated video generation at scale.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://shotstack.io/docs/api/](https://shotstack.io/docs/api/)
-- **Base URL:** `https://api.shotstack.io/edit/v1`
+- [Shotstack Authentication](https://apis.io/security/shotstack/shotstack-authentication/)
+- [Shotstack Domain Security](https://apis.io/security/shotstack/shotstack-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Templates
-- Merge Fields
-- Automation
+Published plans, tiers and prices.
 
-#### Properties
+- [Shotstack Plans Pricing](https://apis.io/plans/shotstack/shotstack-plans-pricing/)
 
-- [Documentation](https://shotstack.io/docs/guide/templates/templates/)
-- [API Reference](https://shotstack.io/docs/api/)
-- [OpenAPI](openapi/shotstack-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shotstack.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shotstack.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Shotstack Ingest API
+Published request limits.
 
-Upload, store, and transform source footage, images, audio, and fonts from a URL or direct upload, with optional renditions and transcription, ready for use by the Edit API.
+- [Shotstack Rate Limits](https://apis.io/rate-limits/shotstack/shotstack-rate-limits/)
 
-- **Human URL:** [https://shotstack.io/docs/api/](https://shotstack.io/docs/api/)
-- **Base URL:** `https://api.shotstack.io/ingest/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Ingest
-- Assets
-- Transcoding
+- [Shotstack Finops](https://apis.io/finops/shotstack/shotstack-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://shotstack.io/docs/guide/ingesting-footage/ingest-api/)
-- [API Reference](https://shotstack.io/docs/api/)
-- [OpenAPI](openapi/shotstack-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shotstack.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shotstack.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Shotstack Serve API
-
-Inspect, manage, and delete the hosting of assets generated by the Edit and Ingest APIs, retrieve CDN URLs by asset or render ID, and transfer files to external destinations.
-
-- **Human URL:** [https://shotstack.io/docs/api/](https://shotstack.io/docs/api/)
-- **Base URL:** `https://api.shotstack.io/serve/v1`
-
-#### Tags
-
-- Serving
-- Hosting
-- CDN
-
-#### Properties
-
-- [Documentation](https://shotstack.io/docs/guide/serving-assets/serve-api/)
-- [API Reference](https://shotstack.io/docs/api/)
-- [OpenAPI](openapi/shotstack-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shotstack.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shotstack.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Shotstack Create (AI Assets) API
-
-Generate AI assets - text-to-speech, text-to-image, image-to-video, and text generation - through built-in (Shotstack) and third-party (ElevenLabs, Stability AI) providers, returning hosted assets for use in renders.
-
-- **Human URL:** [https://shotstack.io/docs/api/](https://shotstack.io/docs/api/)
-- **Base URL:** `https://api.shotstack.io/create/v1`
-
-#### Tags
-
-- Generative AI
-- Text to Speech
-- Text to Image
-
-#### Properties
-
-- [Documentation](https://shotstack.io/product/create-api/)
-- [API Reference](https://shotstack.io/docs/api/)
-- [OpenAPI](openapi/shotstack-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/shotstack.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/shotstack.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/shotstack)
-- [LinkedIn](https://www.linkedin.com/company/shotstack)
 - [Website](https://shotstack.io)
 - [Documentation](https://shotstack.io/docs/)
-- [Plans](plans/shotstack-plans-pricing.yml)
-- [Rate Limits](rate-limits/shotstack-rate-limits.yml)
-- [Fin Ops](finops/shotstack-finops.yml)
+- [GitHub](https://github.com/shotstack)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/shotstack/](https://apis.io/providers/shotstack/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Shotstack: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/shotstack/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
